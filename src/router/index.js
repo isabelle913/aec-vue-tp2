@@ -1,23 +1,38 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Accueil from "../views/Accueil.vue";
+import Equipes from "../views/Equipes.vue";
+import DetailsEquipe from "../views/Details-equipe.vue";
+import Inscription from "../views/Inscription.vue";
+import Erreur from "../views/Erreur.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "accueil",
+      component: Accueil,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
+      path: "/equipes",
+      name: "equipes",
+      component: Equipes,
+    },
+    {
+      path: "/equipes/:id",
+      name: "details",
+      component: DetailsEquipe,
+    },
+    {
+      path: "/inscription",
+      name: "inscription",
+      component: Inscription,
+    },
+    {
+      path: "/:patchMatch(.*)*",
+      component: Erreur,
+    },
+  ],
+});
 
-export default router
+export default router;
