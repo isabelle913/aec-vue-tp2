@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  purge: ["./index.html", "./src/**/*.{vue,js}"],
+  content: [
+    // Example content paths...
+    "./public/**/*.html",
+    "./src/**/*.{js,vue}",
+  ],
   darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {},
