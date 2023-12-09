@@ -34,18 +34,23 @@ export default {
       ],
     };
   },
-  methods: {
-    addTeams(newTeam) {
-      this.teams.push(newTeam);
-    },
-  },
+  // methods: {
+  //   addTeams(newTeam) {
+  //     this.teams.push(newTeam);
+  //   },
+  // },
   provide() {
     return {
-      addTeams: this.addTeams(),
+      // addTeams: this.addTeams(),
+      // teams: this.teams,
       teams: computed(() => this.teams),
     };
   },
 };
 </script>
 
-<style scoped></style>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap");
+</style>
+
+<!-- TODO Changer favicon et titre -->

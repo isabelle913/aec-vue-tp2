@@ -50,7 +50,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap");
 .banner-container {
   background-color: #f5dd90;
   font-family: "Kalnia", serif;

@@ -6,6 +6,6 @@
 import { RouterLink, RouterView } from "vue-router";
 
 export default {
-  inject: ["addTeams", "teams"],
+  inject: ["teams"],
 };
 </script>
