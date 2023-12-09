@@ -51,6 +51,10 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap");
+
+h1 {
+  font-family: "Kalnia", serif;
+}
 </style>
 
 <!-- TODO Changer favicon et titre -->
