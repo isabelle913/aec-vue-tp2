@@ -1,9 +1,9 @@
 <template>
-  <Navigation></Navigation>
-  <div class="container mx-auto">
-    <div class="p-2">
-      <RouterView />
-    </div>
+  <div class="h-screen">
+    <Navigation></Navigation>
+    <RouterView />
+    <div>Footer</div>
+    <!-- TODO footer -->
   </div>
 </template>
 
