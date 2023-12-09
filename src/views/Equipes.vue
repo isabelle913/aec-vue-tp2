@@ -29,9 +29,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-family: "Kalnia", serif;
-}
 a {
   color: white;
   padding: 6px 12px;
