@@ -3,34 +3,55 @@
     <h1 class="text-center text-6xl mb-6">
       Par ici pour inscrire une équipe !
     </h1>
-    <div class="form-container p-6">
+    <div class="form-container p-6 rounded-lg">
       <form @submit="validate">
         <!-- first section -->
         <div class="flex flex-wrap">
-          <div class="w-1/2 p-4">
+          <div class="w-full md:w-1/2 p-4">
             <!-- prettier-ignore -->
-            <label for="id" class="block" >{{ newTeam.id.label }}<span class="text-red-500 text-xl"> *</span></label>
-            <!-- prettier-ignore -->
-            <input type="text" id="id" v-model.number="newTeam.id.value" class="p-2 rounded-lg w-full focus:outline-none" />
-            <!-- prettier-ignore -->
-            <p v-if="newTeam.id.displayErreur">{{ newTeam.id.erreurMessage }}</p>
+            <InputBase id="idEquipe" v-model="teamObj.idEquipe.value" :erreurMessage="teamObj.idEquipe.erreurMessage" :label="teamObj.idEquipe.label" />
           </div>
-          <div class="w-1/2 p-4">
+          <div class="w-full md:w-1/2 p-4">
             <!-- prettier-ignore -->
-            <label for="name" class="block" >{{ newTeam.nom.label }}<span class="text-red-500 text-xl"> *</span></label>
-            <!-- prettier-ignore -->
-            <input type="text" id="name" v-model.trim="newTeam.nom.id" class="p-2 rounded-lg w-full" />
-            <p v-if="newTeam.nom.displayErreur">
-              {{ newTeam.nom.erreurMessage }}
-            </p>
+            <InputBase id="nom" v-model="teamObj.nom.value" :erreurMessage="teamObj.nom.erreurMessage" :label="teamObj.nom.label" />
           </div>
 
-          <div>logo</div>
+          <div class="w-full p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="logo" v-model="teamObj.logo.value" :erreurMessage="teamObj.logo.erreurMessage" :label="teamObj.logo.label" />
+          </div>
         </div>
 
+        <div class="separator"></div>
+
         <!-- second section -->
-        <div>joueur</div>
-        <button>Inscription</button>
+        <div class="text-center text-2xl">Les joueurs</div>
+        <div class="flex flex-wrap">
+          <div class="w-full md:w-1/2 p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="joueur1" v-model="teamObj.joueur1.value" :erreurMessage="teamObj.joueur1.erreurMessage" :label="teamObj.joueur1.label" />
+          </div>
+          <div class="w-full md:w-1/2 p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="joueur2" v-model="teamObj.joueur2.value" :erreurMessage="teamObj.joueur2.erreurMessage" :label="teamObj.joueur2.label" />
+          </div>
+          <div class="w-full md:w-1/2 p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="joueur3" v-model="teamObj.joueur3.value" :erreurMessage="teamObj.joueur3.erreurMessage" :label="teamObj.joueur3.label" />
+          </div>
+          <div class="w-full md:w-1/2 p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="joueur4" v-model="teamObj.joueur4.value" :erreurMessage="teamObj.joueur4.erreurMessage" :label="teamObj.joueur4.label" />
+          </div>
+          <div class="w-full md:w-1/2 p-4">
+            <!-- prettier-ignore -->
+            <InputBase id="joueur5" v-model="teamObj.joueur5.value" :erreurMessage="teamObj.joueur5.erreurMessage" :label="teamObj.joueur5.label" />
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-8">
+          <button class="btnSubmit">Inscription</button>
+        </div>
       </form>
     </div>
   </div>
@@ -43,34 +64,50 @@ export default {
   components: {
     InputBase,
   },
-  // inject: ["addTeams", "teams"],
+  inject: [/*"addTeam",*/ "teams", "getNewTeam"],
   data() {
     return {
-      newTeam: {
-        id: {
+      teamObj: {
+        idEquipe: {
           value: undefined,
-          label: "Veuillez inscrire le numéro de l'équipe",
-          erreur1: "Veuillez inscrire un numéro d'équipe valide",
-          erreur2:
-            "Ce numéro d'équipe est déja en utilisation veuillez en choisir un autre",
-          displayErreur: 0,
-          erreurMessage: () =>
-            this.newTeam.id.displayErreur === 2
-              ? this.newTeam.id.erreur2
-              : this.newTeam.id.erreur1,
+          label: "Numéro",
+          erreurMessage: "",
         },
         nom: {
           value: "",
-          label: "Veuillez inscrire le nom de l'équipe",
-          erreurMessage: "Veuillez inscrire un nom d'équipe",
-          displayErreur: false,
+          label: "Nom de l'équipe",
+          erreurMessage: "",
         },
-        logo: "",
-        joueur1: "",
-        joueur2: "",
-        joueur3: "",
-        joueur4: "",
-        joueur5: "",
+        logo: {
+          value: "",
+          label: "URL du logo",
+          erreurMessage: "",
+        },
+        joueur1: {
+          value: "",
+          label: "Joueur 1",
+          erreurMessage: "",
+        },
+        joueur2: {
+          value: "",
+          label: "Joueur 2",
+          erreurMessage: "",
+        },
+        joueur3: {
+          value: "",
+          label: "Joueur 3",
+          erreurMessage: "",
+        },
+        joueur4: {
+          value: "",
+          label: "Joueur 4",
+          erreurMessage: "",
+        },
+        joueur5: {
+          value: "",
+          label: "Joueur 5",
+          erreurMessage: "",
+        },
       },
     };
   },
@@ -78,25 +115,83 @@ export default {
     validate(e) {
       e.preventDefault();
 
+      console.log("Teams", this.teams);
+
       this.resetErreurs();
 
       let isValide = true;
+
+      const idEquipe = Number(this.teamObj.idEquipe.value);
+
+      const isIdEquipeAlreadyExist = this.teams.some(
+        (team) => team.idEquipe === idEquipe
+      );
+
       // prettier-ignore
-      if ( !this.newTeam.id.value > 0 && typeof this.newTeam.id.value !== "number") {
-        this.newTeam.id.displayErreur = 1;
-        console.log("Miip ID");
+      if (typeof idEquipe !==  "number" || idEquipe <= 0 || !idEquipe ) {
+        this.teamObj.idEquipe.erreurMessage = "Veuillez inscrire un numéro d'équipe valide";
+        isValide = false;
+      } else if (isIdEquipeAlreadyExist){
+        this.teamObj.idEquipe.erreurMessage = "Ce numéro d'équipe est déja en utilisation veuillez en choisir un autre";
+        isValide = false;
       }
-      if (this.newTeam.nom.value === "") {
-        this.newTeam.nom.displayErreur = true;
-        console.log("Miip NOM");
+      if (this.teamObj.nom.value === "") {
+        this.teamObj.nom.erreurMessage = "Veuillez inscrire un nom d'équipe";
+        isValide = false;
+      }
+      if (this.teamObj.logo.value === "") {
+        this.teamObj.logo.erreurMessage = "Veuillez ajouter l'URL du logo";
+        isValide = false;
+      }
+      if (this.teamObj.joueur1.value === "") {
+        this.teamObj.joueur1.erreurMessage = "Veuillez inscrire le joueur";
+        isValide = false;
+      }
+      if (this.teamObj.joueur2.value === "") {
+        this.teamObj.joueur2.erreurMessage = "Veuillez inscrire le joueur";
+        isValide = false;
+      }
+      if (this.teamObj.joueur3.value === "") {
+        this.teamObj.joueur3.erreurMessage = "Veuillez inscrire le joueur";
+        isValide = false;
+      }
+      if (this.teamObj.joueur4.value === "") {
+        this.teamObj.joueur4.erreurMessage = "Veuillez inscrire le joueur";
+        isValide = false;
+      }
+      if (this.teamObj.joueur5.value === "") {
+        this.teamObj.joueur5.erreurMessage = "Veuillez inscrire le joueur";
+        isValide = false;
       }
 
-      // addTeams
-      // router push équipes
+      if (!isValide) return;
+
+      const newTeam = {
+        idEquipe: this.teamObj.idEquipe.value,
+        nom: this.teamObj.nom.value,
+        logo: this.teamObj.logo.value,
+        joueur1: this.teamObj.joueur1.value,
+        joueur2: this.teamObj.joueur2.value,
+        joueur3: this.teamObj.joueur3.value,
+        joueur4: this.teamObj.joueur4.value,
+        joueur5: this.teamObj.joueur5.value,
+      };
+      console.log(" Inscription -> newTeam", newTeam);
+
+      // this.$emits("addTeam", newTeam);
+      // this.$emits("getNewTeam", newTeam);
+
+      this.$router.push({ name: "equipes" });
     },
     resetErreurs() {
-      this.newTeam.id.displayErreur = 0;
-      this.newTeam.nom.displayErreur = false;
+      this.teamObj.idEquipe.erreurMessage = "";
+      this.teamObj.nom.erreurMessage = "";
+      this.teamObj.logo.erreurMessage = "";
+      this.teamObj.joueur1.erreurMessage = "";
+      this.teamObj.joueur2.erreurMessage = "";
+      this.teamObj.joueur3.erreurMessage = "";
+      this.teamObj.joueur4.erreurMessage = "";
+      this.teamObj.joueur5.erreurMessage = "";
     },
   },
 };
@@ -104,5 +199,22 @@ export default {
 <style scoped>
 .form-container {
   background-color: #f5dd90;
+}
+.separator {
+  border-bottom: solid 1px #6f8695;
+  margin: 20px 0;
+}
+.btnSubmit {
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #f68e5f;
+  padding: 15px 30px;
+  font-size: 30px;
+}
+.btnSubmit:focus,
+.btnSubmit:hover {
+  outline: none;
+  scale: 1.2;
 }
 </style>

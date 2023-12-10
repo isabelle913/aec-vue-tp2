@@ -32,19 +32,36 @@ export default {
           joueurs: ["Mario", "Peach", "Yoshi", "Luigi", "Toad"],
         },
       ],
+      getNewTeam: {},
     };
   },
-  // methods: {
-  //   addTeams(newTeam) {
-  //     this.teams.push(newTeam);
-  //   },
-  // },
+  methods: {
+    addTeam(newTeam) {
+      if (newTeam) {
+        console.log("Miip");
+        console.log("addTeam -> newTeam", newTeam);
+      }
+      console.log("Biip");
+      //this.teams.push(newTeam);
+    },
+  },
   provide() {
     return {
-      // addTeams: this.addTeams(),
-      // teams: this.teams,
+      // addTeam: () => {
+      //   this.addTeam();
+      // },
+      // addTeam: this.addTeam,
+      // addTeam: this.addTeam(),
       teams: computed(() => this.teams),
+      getNewTeam: this.getNewTeam,
     };
+  },
+  watch: {
+    getNewTeam(newTeam) {
+      if (newTeam) {
+        this.addTeam(newTeam);
+      }
+    },
   },
 };
 </script>
