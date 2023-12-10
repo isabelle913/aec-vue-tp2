@@ -1,7 +1,9 @@
 <template>
   <div class="navigation h-20 flex flex-col justify-center">
     <div class="container mx-auto p-2 flex justify-between items-center">
-      <div class="h-16 w-16 flex items-center">
+      <div
+        class="h-16 w-16 flex items-center cursor-pointer"
+        @click="goAccueil">
         <img src="../assets/images/logo-eSport-color.png" />
         <div class="logo-title">eSPort</div>
       </div>
@@ -18,6 +20,14 @@
 
 <script>
 import { RouterLink } from "vue-router";
+
+export default {
+  methods: {
+    goAccueil() {
+      this.$router.push({ name: "accueil" });
+    },
+  },
+};
 </script>
 
 <style scoped>
