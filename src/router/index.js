@@ -30,6 +30,7 @@ const router = createRouter({
     },
     {
       path: "/:patchMatch(.*)*",
+      name: "erreur",
       component: Erreur,
     },
   ],
