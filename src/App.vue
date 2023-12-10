@@ -1,20 +1,22 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen flex flex-col justify-between">
     <Navigation></Navigation>
     <RouterView />
-    <div>Footer</div>
-    <!-- TODO footer -->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import { RouterView } from "vue-router";
-import Navigation from "./components/Navigation.vue";
 import { computed } from "vue";
+
+import Navigation from "./components/Navigation.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   components: {
     Navigation,
+    Footer,
   },
   data() {
     return {
@@ -38,30 +40,15 @@ export default {
   methods: {
     addTeam(newTeam) {
       if (newTeam) {
-        console.log("Miip");
-        console.log("addTeam -> newTeam", newTeam);
+        this.teams.push(newTeam);
       }
-      console.log("Biip");
-      //this.teams.push(newTeam);
     },
   },
   provide() {
     return {
-      // addTeam: () => {
-      //   this.addTeam();
-      // },
-      // addTeam: this.addTeam,
-      // addTeam: this.addTeam(),
+      addTeam: this.addTeam,
       teams: computed(() => this.teams),
-      getNewTeam: this.getNewTeam,
     };
-  },
-  watch: {
-    getNewTeam(newTeam) {
-      if (newTeam) {
-        this.addTeam(newTeam);
-      }
-    },
   },
 };
 </script>
@@ -73,5 +60,3 @@ h1 {
   font-family: "Kalnia", serif;
 }
 </style>
-
-<!-- TODO Changer favicon et titre -->
