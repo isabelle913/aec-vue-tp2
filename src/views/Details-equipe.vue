@@ -35,7 +35,15 @@ export default {
   },
   mounted() {
     const id = Number(this.idEquipe);
-    this.team = this.teams.filter((team) => team.idEquipe === id)[0];
+
+    if (id > 0) {
+      const teamReceived = this.teams.filter((team) => team.idEquipe === id)[0];
+
+      if (teamReceived) this.team = teamReceived;
+      else this.$router.push({ name: "erreur" });
+    } else {
+      this.$router.push({ name: "erreur" });
+    }
   },
 };
 </script>
