@@ -1,15 +1,17 @@
 <template>
-  <div class="banner-container h-1/3">
-    <div class="container mx-auto banner flex flex-col justify-center h-full">
-      <div class="text-center">Vive l'activité physique</div>
+  <div class="h-full">
+    <div class="banner-container h-1/3">
+      <div class="container mx-auto banner flex flex-col justify-center h-full">
+        <div class="text-center">Vive l'activité physique</div>
+      </div>
     </div>
-  </div>
-  <div class="flex justify-center p-6 gap-6 flex-wrap">
-    <CardActivite
-      v-for="(act, index) in activites"
-      :key="index"
-      :title="act.title"
-      :description="act.description" />
+    <div class="flex justify-center p-6 gap-6 flex-wrap mt-12">
+      <CardActivite
+        v-for="(act, index) in activites"
+        :key="index"
+        :title="act.title"
+        :description="act.description" />
+    </div>
   </div>
 </template>
 

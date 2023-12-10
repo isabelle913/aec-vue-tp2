@@ -1,7 +1,7 @@
 <template>
-  <div class="container mx-auto p-6">
+  <div class="container mx-auto p-6 h-full">
     <h1 class="text-center text-6xl">Nos équipes</h1>
-    <div class="flex justify-center p-6 gap-6 flex-wrap">
+    <div class="flex justify-center p-6 gap-6 flex-wrap my-12">
       <CardTeam
         v-for="team in teams"
         :key="team.idEquipe"
