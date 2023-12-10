@@ -5,13 +5,7 @@
   </div>
 </template>
 
-<script>
-import { RouterLink, RouterView } from "vue-router";
-
-export default {
-  inject: ["addTeams", "teams"],
-};
-</script>
+<script></script>
 <style scoped>
 .page-erreur {
   font-family: "Kalnia", serif;

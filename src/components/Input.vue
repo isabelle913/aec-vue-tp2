@@ -3,7 +3,6 @@
     {{ label }}
     <span class="text-red-500 text-xl"> *</span>
   </label>
-  <!--  @input="$emit('update:modelValue', $event.target.value)" -->
   <input type="text" id="id" v-model="theModel" class="p-2 rounded-lg w-full" />
 
   <p v-if="erreurMessage" class="text-red-500 text-xs">{{ erreurMessage }}</p>
