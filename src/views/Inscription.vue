@@ -64,7 +64,7 @@ export default {
   components: {
     InputBase,
   },
-  inject: [/*"addTeam",*/ "teams", "getNewTeam"],
+  inject: ["addTeam", "teams"],
   data() {
     return {
       teamObj: {
@@ -114,8 +114,6 @@ export default {
   methods: {
     validate(e) {
       e.preventDefault();
-
-      console.log("Teams", this.teams);
 
       this.resetErreurs();
 
@@ -167,20 +165,19 @@ export default {
       if (!isValide) return;
 
       const newTeam = {
-        idEquipe: this.teamObj.idEquipe.value,
+        idEquipe: idEquipe,
         nom: this.teamObj.nom.value,
         logo: this.teamObj.logo.value,
-        joueur1: this.teamObj.joueur1.value,
-        joueur2: this.teamObj.joueur2.value,
-        joueur3: this.teamObj.joueur3.value,
-        joueur4: this.teamObj.joueur4.value,
-        joueur5: this.teamObj.joueur5.value,
+        joueurs: [
+          this.teamObj.joueur1.value,
+          this.teamObj.joueur2.value,
+          this.teamObj.joueur3.value,
+          this.teamObj.joueur4.value,
+          this.teamObj.joueur5.value,
+        ],
       };
-      console.log(" Inscription -> newTeam", newTeam);
 
-      // this.$emits("addTeam", newTeam);
-      // this.$emits("getNewTeam", newTeam);
-
+      this.addTeam(newTeam);
       this.$router.push({ name: "equipes" });
     },
     resetErreurs() {
